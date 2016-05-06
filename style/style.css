@@ -1,0 +1,677 @@
+@use postcss-nested;
+@use postcss-clearfix;
+@use postcss-mixins;
+
+.content {
+	font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+	color: #626262;
+	font-size: 15px;
+
+	clear: fix;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	height: auto;
+}
+
+.sprite {
+	background-image: url(http://icanchoose.ru/public/frontend/img/spritesheet.png);
+	background-repeat: no-repeat;
+	display: inline-block;
+
+	&.sprite-filter-users {
+		margin-left: -5px;
+	}
+}
+
+@define-mixin stitches $name, $x, $y, $width, $height {
+	.sprite-$(name) {
+		background-position: $x $y;
+		width: $width;
+		height: $height;
+	}
+}
+
+@mixin stitches filter-users, -116px, -3px, 25px, 17px;
+@mixin stitches filter-world, -147px, -3px, 17px, 17px;
+@mixin stitches filter-marker, -72px, -3px, 16px, 21px;
+
+.company {
+	&-actions {
+		&-title {
+			img {
+				height: 32px;
+			}
+
+			font-size: 22px;
+			line-height: 32px;
+			margin-bottom: 10px;
+			padding-bottom: 6px;
+			clear: fix;
+		}
+
+		margin-bottom: 15px;
+		padding: 10px 0;
+		border-bottom: 1px solid #e3e3e3;
+		border-top: 1px solid #e3e3e3;
+	}
+
+	&-heading {
+   clear: fix;
+
+		&-logo {
+			 float: right;
+			 margin-top: 10px;
+		 }
+
+		&-title {
+			h1, .h1 {
+				margin: 0;
+			}
+
+			p {
+				margin: 0;
+			}
+
+			margin-bottom: 25px;
+		}
+
+		&-metadata {
+			.sprite {
+				vertical-align: middle;
+			}
+
+			> span {
+				margin-left: 25px;
+			}
+
+			float: right;
+			margin: 10px 0 25px;
+		}
+
+		&-share {
+			min-height: 36px;
+			margin-bottom: 20px;
+		}
+
+		@media (max-width: @screen-sm-max) {
+			&-metadata {
+				float: none;
+				margin-bottom: 20px;
+				margin-left: -25px;
+			}
+		}
+	}
+
+	&-office {
+		.widget--insight .insight-title {
+			color: #f04c40;
+		}
+	}
+
+	&-people {
+		.widget--insight .insight-title {
+			color: #168a8f;
+		}
+	}
+
+	&-widget-adding {
+		select {
+			max-width: 200px;
+		}
+	}
+
+	h1, .h1 {
+		margin-top: 0;
+		font-weight: normal;
+	}
+}
+
+.widget {
+	h2, .h2 {
+		font-size: 24px;
+		font-weight: normal;
+	}
+
+	.img-responsive {
+		width: 100%;
+	}
+
+	.editable-actions {
+		&--hide {
+			opacity: 0;
+			visibility: hidden;
+		}
+
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		transition: opacity .4s;
+		z-index: 5;
+	}
+
+	.editable-form {
+		&--hide {
+			opacity: 0;
+			visibility: hidden;
+		}
+
+		&-close {
+			 position: absolute;
+			 top: 5px;
+			 right: 5px;
+		}
+
+		background-color: rgba(0, 0, 0, .9);
+		color: #fff;
+		padding: 10px;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		opacity: 1;
+		transition: .5s linear;
+		z-index: 5;
+		overflow-x: auto;
+	}
+
+	.text-lower-right,
+	.text-bottom,
+	.text-people-bottom {
+		&:hover, &:focus {
+			text-decoration: none;
+		}
+
+		position: absolute;
+		bottom: 0;
+		display: block;
+	}
+
+	.text-lower-right {
+		bottom: 30px;
+		right: 40px;
+		font-size: 48px;
+		color: #fff;
+		text-shadow: 0px 1px 3px rgba(0, 0, 0, .5);
+		text-align: right;
+	}
+
+	.text-bottom {
+		background-color: rgba(0, 0, 0, .7);
+		text-align: center;
+		width: 100%;
+		color: #fff;
+		font-size: 18px;
+		padding: 16px 0;
+	}
+
+	&--office {
+		&-two, &-three {
+			.text-lower-right {
+				bottom: 30px;
+				right: 20px;
+				font-size: 24px;
+			}
+		}
+
+		&-full {
+			.text-bottom {
+				text-align: left;
+				font-size: 14px;
+				padding: 16px;
+			}
+
+			iframe {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				z-index: 2;
+			}
+
+			a {
+				display: block;
+			}
+
+			a[href] {
+				&::before {
+					content: ' ';
+					display: block;
+					background: url(http://icanchoose.ru/public/frontend/img/play.png) no-repeat;
+					width: 144px;
+					height: 144px;
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					margin: auto;
+				}
+			}
+		}
+
+		.carousel-indicators {
+			bottom: 0px;
+		}
+
+		.carousel-control {
+			& .icon-next,
+			& .glyphicon-chevron-right {
+				right: 6px;
+			}
+			& .icon-prev,
+			& .glyphicon-chevron-left {
+				left: 20px;
+			}
+
+			width: 10%;
+		}
+	}
+
+	&--people {
+		.text-people-bottom {
+			a {
+				color: #fff;
+			}
+
+			h2, h3, .h2, .h3 {
+				color: #fff;
+				font-weight: normal;
+			}
+
+			p {
+				font-size: 13px;
+			}
+
+			.see-people {
+				border-top: 1px dashed #fff;
+			}
+
+			background-color: rgba(0, 0, 0, .5);
+			right: 0;
+			width: 280px;
+			padding: 10px 30px 0;
+			text-align: right;
+			color: #fff;
+		}
+
+		&-full {
+			a {
+				&:hover, &:focus {
+					color: #fff;
+					text-decoration: none;
+				}
+
+				display: block;
+				color: #fff;
+			}
+
+			.text-people {
+				&-right {
+					right: 55px;
+				}
+
+				&-left {
+					left: 55px;
+				}
+
+				position: absolute;
+				max-width: 600px;
+				padding: 45px 55px;
+				bottom: 65px;
+				background-color: rgba(0, 0, 0, 0.56);
+			}
+
+			.people-name {
+				font-size: 30px;
+				text-transform: uppercase;
+			}
+
+			.people-position {
+				border-bottom: 1px dashed #fff;
+				padding-bottom: 10px;
+				margin-bottom: 10px;
+			}
+
+			.people-bio {
+				margin-bottom: 15px;
+			}
+
+			.people-video {
+				.fa {
+					vertical-align: middle;
+					margin-right: 10px;
+				}
+			}
+
+			iframe {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				z-index: 2;
+			}
+
+			position: relative;
+			font-size: 14px;
+			color: #fff;
+		}
+	}
+
+	&--video {
+		iframe {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			z-index: 2;
+		}
+
+		a {
+			&::before {
+				content: ' ';
+				display: block;
+				background: url(http://icanchoose.ru/public/frontend/img/play.png) no-repeat;
+				width: 144px;
+				height: 144px;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin: auto;
+			}
+
+			display:block;
+		}
+
+		.text-bottom {
+			text-align: left;
+			padding: 16px;
+		}
+	}
+
+	&--insight {
+		.insight-content {
+			&::before {
+				content: ' ';
+				height: 0;
+				width: 0;
+				position: absolute;
+				top: -48px;
+				left: 30px;
+				border: 25px solid transparent;
+				border-bottom-color: #fff;
+			}
+
+			padding: 23px;
+			position: relative;
+		}
+
+		.insight-category {
+			color: #c5c8ce;
+		}
+
+		.insight-title {
+			color: #168a8f;
+			font-size: 24px;
+			margin-bottom: 10px;
+		}
+
+		.insight-text {
+			color: #414141;
+		}
+
+		box-shadow: 0 0 1px 1px #e9eaea;
+		background-color: #fff;
+	}
+
+	&--instagram {
+		&--icon {
+			&:hover, &:focus {
+				color: #fff;
+				text-shadow: 0 0 4px #000;
+			}
+
+			position: absolute;
+			bottom: 16px;
+			right: 16px;
+			color: #fff;
+			font-size: 22px;
+			text-shadow: 0 0 2px #000;
+		}
+
+		position: relative;
+	}
+
+	&--social, &--quote {
+		&::after {
+			content: ' ';
+			height: 0;
+			width: 0;
+			position: absolute;
+			bottom: -20px;
+			left: 20px;
+			border: 10px solid transparent;
+			border-left-color: #ccc;
+			border-left-width: 15px;
+			border-top-color: #ccc;
+			border-right-width: 15px;
+		}
+
+		h2, h3, .h2, .h3 {
+			margin-top: 0;
+			font-weight: normal;
+		}
+
+		background-color: #ccc;
+		padding: 25px 20px;
+		min-height: 220px;
+		margin-bottom: 40px;
+		position: relative;
+	}
+
+	&--social {
+		&::before {
+			content: '\f075';
+			position: absolute;
+			bottom: 15px;
+			right: 20px;
+			font-family: FontAwesome;
+			font-size: 22px;
+		}
+
+		&:hover, &:focus {
+			color: #fff;
+			text-decoration: none;
+		}
+
+		h2, h3, .h2, .h3 {
+			color: #fff;
+		}
+
+		color: #fff;
+		display: block;
+	}
+
+	&--twitter {
+		&::after {
+			border-left-color: #00aff0;
+			border-top-color: #00aff0;
+		}
+
+		&::before {
+			content: '\f099';
+		}
+
+		background-color: #00aff0;
+	}
+
+	&--vk {
+		&::after {
+			border-left-color: #4c75a3;
+			border-top-color: #4c75a3;
+		}
+
+		&::before {
+			content: '\f189';
+		}
+
+		background-color: #4c75a3;
+	}
+
+	&--facebook {
+		&::after {
+			border-left-color: #3b5999;
+			border-top-color: #3b5999;
+		}
+
+		&::before {
+			content: '\f09a';
+		}
+
+		background-color: #3b5999;
+	}
+
+	&--linkedin {
+		&::after {
+			border-left-color: #007bb6;
+			border-top-color: #007bb6;
+		}
+
+		&::before {
+			content: '\f0e1';
+		}
+
+		background-color: #007bb6;
+	}
+
+	&--quote {
+		&.widget--editable &-content {
+			min-height: 280px;
+		}
+
+		&-content {
+			&::after {
+				content: ' ';
+				height: 0;
+				width: 0;
+				position: absolute;
+				bottom: -16px;
+				left: 19px;
+				border: 10px solid transparent;
+				border-left-color: #fff;
+				border-left-width: 15px;
+				border-top-color: #fff;
+				border-right-width: 15px;
+				z-index: 2;
+			}
+
+			background-color: #fff;
+			width: 100%;
+			min-height: 160px;
+			position: relative;
+			padding: 45px 25px 65px 25px;
+			font-size: 18px;
+		}
+
+		.quote-author {
+			position: absolute;
+			bottom: 25px;
+			right: 20px;
+			text-align: right;
+			font-size: 14px;
+		}
+
+		&-orange {
+			&::after {
+				border-left-color: #ff6900;
+				border-top-color: #ff6900;
+			}
+
+			background-color: #ff6900;
+			color: #ff6900;
+		}
+
+		&-purple {
+			&::after {
+				border-left-color: #8d2663;
+				border-top-color: #8d2663;
+			}
+
+			background-color: #8d2663;
+			color: #8d2663;
+		}
+
+		&-red {
+			&::after {
+				border-left-color: #f04c40;
+				border-top-color: #f04c40;
+			}
+
+			background-color: #f04c40;
+			color: #f04c40;
+		}
+
+		&-turquoise {
+			&::after {
+				border-left-color: #168a8f;
+				border-top-color: #168a8f;
+			}
+
+			background-color: #168a8f;
+			color: #168a8f;
+		}
+
+		min-height: 160px;
+		padding: 5px;
+	}
+
+	&--help-job {
+		&:hover, &:focus {
+			color: #fff;
+			text-decoration: none;
+		}
+
+		h2, h3, .h2, .h3 {
+			color: #fff;
+		}
+
+		color: #fff;
+		background-image: url(http://icanchoose.ru/public/frontend/img/wanted-bg.png);
+		background-repeat: no-repeat;
+		background-position: top center;
+		background-size: cover;
+		padding: 30px 35px;
+	}
+
+	&--map {
+		 /*img {
+			 -webkit-filter: grayscale(100%);
+			 -moz-filter: grayscale(100%);
+			 -ms-filter: grayscale(100%);
+			 -o-filter: grayscale(100%);
+			 filter: grayscale(100%);
+			 filter: url(../img/grayscale.svg); *//* Firefox 4+ *//*
+			 filter: gray; *//* IE 6-9 *//*
+		 }*/
+
+		width: 360px;
+		height: 246px;
+
+		.text-bottom {
+			font-size: 14px;
+			text-align: left;
+			padding: 16px;
+		}
+	}
+
+	display: block;
+	position: relative;
+	margin-bottom: 20px;
+	font-family: 'Open Sans', sans-serif;
+}
