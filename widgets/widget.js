@@ -37,11 +37,10 @@ export default class Widget extends React.Component {
 				quote_red: quote,
 				quote_turquoise: quote,
 				quote_purple: quote
-			},
-			sm = 1000 > this.props.width;
+			};
 
 		return (
-			<div className="company" style={{minWidth: '750px'}}>
+			<div className="company">
 				<div className="content">
 					<div className="company-heading">
 						<div className="company-heading-logo">
@@ -64,61 +63,42 @@ export default class Widget extends React.Component {
 					</div>
 					<div className="company-body">
 						<div className="row">
-							<div className={`col-md-${sm ? 12 : 8}`}>
+							<div className="col-xs-8 col-xxs-12">
 								<Carousel>
 									{fixed[0].data.slider.map((el, index) =>
 										<img src={host + el.path} key={index} />
 									)}
 								</Carousel>
 							</div>
-							<div className={`col-md-${sm ? 12 : 4}`}>
-								<div className="row">
-									<div className={`col-md-${sm ? 6 : 12}`}>
-										<Office host={host} slug={slug} {...fixed[1]} />
-									</div>
-									<div className={`col-md-${sm ? 6 : 12}`}>
-										<Office host={host} slug={slug} {...fixed[2]} />
-									</div>
-								</div>
+							<div className="col-xs-4 col-xxs-12">
+								<Office host={host} slug={slug} {...fixed[1]} />
+								<Office host={host} slug={slug} {...fixed[2]} />
 							</div>
 						</div>
 						<div className="row">
-							<div className={`col-md-${sm ? 6 : 4} widgets-col1`}>
+							<div className="col-xs-4 col-xxs-12 widgets-col1">
 								{Object.keys(other).filter(el => 0 == el % 3).map(el => {
 									const Widget = widgets[other[el].type];
 									return <Widget host={host} slug={slug} { ...other[el]} key={el} />;
 								})}
-								{sm ? Object.keys(other).filter(el => 2 == el % 3).map((el, index) => {
-									if (1 == index % 2) return;
-									const Widget = widgets[other[el].type];
-									return <Widget host={host} slug={slug} { ...other[el]} key={el} />;
-								}) : ''}
 							</div>
-							<div className={`col-md-${sm ? 6 : 4} widgets-col1`}>
+							<div className="col-xs-4 col-xxs-12 widgets-col1">
 								{Object.keys(other).filter(el => 1 == el % 3).map(el => {
 									const Widget = widgets[other[el].type];
 									return <Widget host={host} slug={slug} { ...other[el]} key={el} />;
 								})}
-								{sm ? Object.keys(other).filter(el => 2 == el % 3).map((el, index) => {
-									if (0 == index % 2) return;
+							</div>
+							<div className="col-xs-4 col-xxs-12 widgets-col1">
+								{Object.keys(other).filter(el => 2 == el % 3).map(el => {
 									const Widget = widgets[other[el].type];
 									return <Widget host={host} slug={slug} { ...other[el]} key={el} />;
-								}) : ''}
+								})}
 							</div>
-							{sm
-								? ''
-								: <div className="col-md-4 widgets-col1">
-										{Object.keys(other).filter(el => 2 == el % 3).map(el => {
-											const Widget = widgets[other[el].type];
-											return <Widget host={host} slug={slug} { ...other[el]} key={el} />;
-										})}
-									</div>
-							}
 						</div>
 					</div>
 					{jobs
 						? <div className="row">
-								<div className={`col-md-${sm ? 12 : 8}`}>
+								<div className="col-xs-8 col-xxs-12">
 									<a className="widget widget--help-job" target="_blank" href={`http://icanchoose.ru/company/${slug}/job/`}>
 										<div className="media">
 											<img height={70} width={70} className="pull-left" alt="Помогите найти!" src="./files/user_what.png" />

@@ -2,6 +2,8 @@
 @use postcss-clearfix;
 @use postcss-mixins;
 
+@import 'grid-xxs.css';
+
 .content {
 	font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
 	color: #626262;
@@ -9,6 +11,8 @@
 
 	clear: fix;
 	width: 100%;
+	padding-right: 15px;
+  padding-left: 15px;
 	margin-left: auto;
 	margin-right: auto;
 	height: auto;
@@ -674,4 +678,45 @@
 	position: relative;
 	margin-bottom: 20px;
 	font-family: 'Open Sans', sans-serif;
+}
+
+@media (max-width: 768px) {
+	.widget .text-lower-right {
+		font-size: calc(48px * 0.5);
+	}
+}
+
+@media (min-width: 479px) and (max-width: 768px) {
+	.widget {
+		font-size: calc(15px * 0.8);
+	}
+
+	.widget .h2, .widget h2 {
+		font-size: calc(24px * 0.8);
+	}
+
+	.widget .h3, .widget h3 {
+		font-size: calc(24px * 0.8);
+	}
+
+	.widget--office-three .text-lower-right,
+	.widget--office-two .text-lower-right {
+		font-size: calc(24px * 0.5);
+	}
+
+	.widget .text-bottom {
+		font-size: calc(18px * 0.8);
+	}
+
+	.widget--insight .insight-title {
+		font-size: calc(24px * 0.8);
+	}
+
+	.widget--quote-content {
+		font-size: calc(14px * 0.8);
+	}
+
+	.widget--quote .quote-author {
+		font-size: calc(14px * 0.8);
+	}
 }
