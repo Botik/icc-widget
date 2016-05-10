@@ -2,8 +2,6 @@
 @use postcss-clearfix;
 @use postcss-mixins;
 
-@import 'grid-xxs.css';
-
 .content {
 	font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
 	color: #626262;
@@ -96,14 +94,6 @@
 		&-share {
 			min-height: 36px;
 			margin-bottom: 20px;
-		}
-
-		@media (max-width: @screen-sm-max) {
-			&-metadata {
-				float: none;
-				margin-bottom: 20px;
-				margin-left: -25px;
-			}
 		}
 	}
 
@@ -680,13 +670,26 @@
 	font-family: 'Open Sans', sans-serif;
 }
 
-@media (max-width: 768px) {
+.company-xxs,
+.company-xs {
 	.widget .text-lower-right {
 		font-size: calc(48px * 0.5);
 	}
 }
 
-@media (min-width: 479px) and (max-width: 768px) {
+.company-xxs {
+	.company-heading-logo {
+		float: none;
+	}
+
+	.company-heading-metadata {
+		float: none;
+		margin-bottom: 20px;
+		margin-left: -25px;
+	}
+}
+
+.company-xs {
 	.widget {
 		font-size: calc(15px * 0.8);
 	}
