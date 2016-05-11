@@ -103,7 +103,7 @@ export default class Widget extends React.Component {
 								<div className={`col-xs-${xxs ? 12 : 8}`}>
 									<a className="widget widget--help-job" target="_blank" href={`http://icanchoose.ru/company/${slug}/job/`}>
 										<div className="media">
-											<img height={70} width={70} className="pull-left" alt="Помогите найти!" src="./files/user_what.png" />
+											<img height={70} width={70} className="pull-left" alt="Помогите найти!" src="http://icanchoose.ru/public/frontend/img/user_what.png" />
 											<div className="media-body">
 												<h3 className="media-heading">Помогите найти!</h3>
 												Разыскиваем специалиста в нашу компанию!<br />Узнайте кто нам нужен!
