@@ -1,3 +1,7 @@
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(style);
+
 export default class QuoteWg extends React.Component {
 
 	static propTypes = {
@@ -17,15 +21,18 @@ export default class QuoteWg extends React.Component {
 		const { host, slug } = this.props;
 		window.open(`${host}/company/${slug}/`, '_blank');
 	}
-	
+
 	render() {
 		const { data: { text, position, author }, type } = this.props;
 
-		return <div className={`widget widget--quote widget--${type.replace('_', '-')}`} onClick={this.clickHandler}>
-			<div className="widget--quote-content">
-				<p data-widget-change="text">{ text }</p>
-				<div className="quote-author">
-					<em><strong data-widget-change="author">{ author }</strong>,<br /><span data-widget-change="position">{ position }</span></em>
+		return <div
+			className={cx('widget', 'widget--quote', `widget--${type.replace('_', '-')}`)}
+			onClick={this.clickHandler}
+		>
+			<div className={style['widget--quote-content']}>
+				<p>{ text }</p>
+				<div className={style['quote-author']}>
+					<em><strong>{ author }</strong>,<br /><span>{ position }</span></em>
 				</div>
 			</div>
 		</div>;

@@ -1,3 +1,7 @@
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(style);
+
 export default class Widget extends React.Component {
 
 	static propTypes = {
@@ -41,56 +45,68 @@ export default class Widget extends React.Component {
 			xs = 768 >= this.props.width,
 			xxs = 479 >= this.props.width;
 
+		const companyClasses = {
+			'company': true,
+			'company-xxs': xxs,
+			'company-xs': (xs && !xxs)
+		}
+
 		return (
-			<div className={`company company-${xxs ? 'xxs' : xs ? 'xs' : 'all'}`}>
-				<div className="content">
-					<div className="company-heading">
-						<div className="company-heading-logo">
+			<div className={cx(companyClasses)}>
+				<div className={style['content']}>
+					<div className={style['company-heading']}>
+						<div className={style['company-heading-logo']}>
 							<a target="_blank" href={site}>
 								<img alt={title} src={host + logo} />
 							</a>
 						</div>
-						<div className="company-heading-title">
-							<h1>
-								<small>Наша компания</small>
+						<div className={style['company-heading-title']}>
+							<div className={style['h1']}>
+								<span className={style['small']}>Наша компания</span>
 								<br />
 								{title}
-							</h1>
+							</div>
 						</div>
-						<div className="company-heading-metadata">
-							<span><i className="sprite sprite-filter-world" /> { activity }</span>
-							<span><i className="sprite sprite-filter-users" /> 50 – 300 человек</span>
-							<span><i className="sprite sprite-filter-marker" /> { location }</span>
+						<div className={style['company-heading-metadata']}>
+							<span>
+								<i className={cx('sprite', 'sprite-filter-world')} /> { activity }
+							</span>
+							<span>
+								<i className={cx('sprite', 'sprite-filter-users')} /> 50 – 300 человек
+							</span>
+							<span>
+								<i className={cx('sprite', 'sprite-filter-marker')} /> { location }
+							</span>
 						</div>
 					</div>
-					<div className="company-body">
-						<div className="row">
-							<div className={`col-xs-${xxs ? 12 : 8}`}>
+					<div className={style['company-body']}>
+						<div className={style['row']}>
+							<div className={style[`col-${xxs ? 12 : 8}`]}>
 								<Carousel>
 									{fixed[0].data.slider.map((el, index) =>
 										<img src={host + el.path} key={index} />
 									)}
 								</Carousel>
 							</div>
-							<div className={`col-xs-${xxs ? 12 : 4}`}>
+							<div className={style[`col-${xxs ? 12 : 4}`]}>
 								<Office host={host} slug={slug} {...fixed[1]} />
 								<Office host={host} slug={slug} {...fixed[2]} />
 							</div>
 						</div>
-						<div className="row">
-							<div className={`col-xs-${xxs ? 12 : 4} widgets-col1`}>
+						<div className={style['row']}>
+							<div className={style[`col-${xxs ? 12 : 4}`]}>
 								{Object.keys(other).filter(el => 0 == el % 3).map(el => {
 									const Widget = widgets[other[el].type];
 									return <Widget host={host} slug={slug} { ...other[el]} key={el} />;
 								})}
 							</div>
-							<div className={`col-xs-${xxs ? 12 : 4} widgets-col1`}>
+							<div className={style[`col-${xxs ? 12 : 4}`]}>
 								{Object.keys(other).filter(el => 1 == el % 3).map(el => {
 									const Widget = widgets[other[el].type];
 									return <Widget host={host} slug={slug} { ...other[el]} key={el} />;
 								})}
 							</div>
-							<div className={`col-xs-${xxs ? 12 : 4} widgets-col1`}>
+							<div className={style[`col-${xxs ? 12 : 4}`]}>
 								{Object.keys(other).filter(el => 2 == el % 3).map(el => {
 									const Widget = widgets[other[el].type];
 									return <Widget host={host} slug={slug} { ...other[el]} key={el} />;
@@ -99,13 +115,17 @@ export default class Widget extends React.Component {
 						</div>
 					</div>
 					{jobs
-						? <div className="row">
-								<div className={`col-xs-${xxs ? 12 : 8}`}>
-									<a className="widget widget--help-job" target="_blank" href={`http://icanchoose.ru/company/${slug}/job/`}>
-										<div className="media">
-											<img height={70} width={70} className="pull-left" alt="Помогите найти!" src="http://icanchoose.ru/public/frontend/img/user_what.png" />
-											<div className="media-body">
-												<h3 className="media-heading">Помогите найти!</h3>
+						? <div className={style['row']}>
+								<div className={style['col-12']}>
+									<a
+										className={cx('widget', 'widget--help-job')}
+										target="_blank"
+										href={`http://icanchoose.ru/company/${slug}/job/`}
+									>
+										<div className={style['media']}>
+											<img height={70} width={70} className={style['pull-left']} alt="Помогите найти!" src="http://icanchoose.ru/public/frontend/img/user_what.png" />
+											<div className={style['media-body']}>
+												<div className={cx('h3', 'media-heading')}>Помогите найти!</div>
 												Разыскиваем специалиста в нашу компанию!<br />Узнайте кто нам нужен!
 											</div>
 										</div>

@@ -4,6 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 const cssnext = require('postcss-cssnext');
 const use = require('postcss-use');
+const postcssImport = require('postcss-import');
 // ?modules&importLoaders=2&localIdentName=[local]--[hash:base64:5]
 
 module.exports = {
@@ -24,7 +25,7 @@ module.exports = {
 				test: /\.css$/,
 				loader: ExtractTextPlugin.extract(
 					'style-loader',
-					'css-loader!postcss-loader'
+					'css-loader?modules&importLoaders=1!postcss-loader'
 				)
 			}
 		]
@@ -41,7 +42,7 @@ module.exports = {
 			}
 		})
 	],
-	postcss: function() {
+	postcss: function(webpack) {
 		return [
 			use({
 				modules: [
@@ -61,6 +62,9 @@ module.exports = {
 						rootValue: 10
 					}
 				}
+			}),
+			postcssImport({
+				addDependencyTo: webpack
 			})
 		];
 	}

@@ -1,3 +1,7 @@
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(style);
+
 export default class VideoWg extends React.Component {
 
 	static propTypes = {
@@ -18,18 +22,18 @@ export default class VideoWg extends React.Component {
 		const { host, slug } = this.props;
 		window.open(`${host}/company/${slug}/`, '_blank');
 	}
-	
+
 	render() {
 		const { data: { section, image: { path }, title, text }, host } = this.props;
 
-		return <div className="widget widget--insight" onClick={this.clickHandler}>
-				<div className="insight-image">
-					<img data-widget-change="image" className="img-responsive" src={host + path} />
+		return <div className={cx('widget', 'widget--insight')} onClick={this.clickHandler}>
+				<div className={style['insight-image']}>
+					<img className={style['img-responsive']} src={host + path} />
 				</div>
-				<div className="insight-content">
-					<div data-widget-change="section" className="insight-category">{section}</div>
-					<h2 data-widget-change="title" className="insight-title">{title}</h2>
-					<div data-widget-change="text" className="insight-text">{text}</div>
+				<div className={style['insight-content']}>
+					<div className={style['insight-category']}>{section}</div>
+					<div className={cx('h2', 'insight-title')}>{title}</div>
+					<div className={style['insight-text']}>{text}</div>
 				</div>
 			</div>;
 	}

@@ -1,3 +1,7 @@
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(style);
+
 export default class Carousel extends React.Component {
 
 	static propTypes = {
@@ -89,7 +93,7 @@ export default class Carousel extends React.Component {
 		if (1 == this.state.children.length) return;
 		e || (this.paused = false);
 		this.interval && clearInterval(this.interval);
-		console.log('Set cycle ' + this.props.options.interval);
+		// console.log('Set cycle ' + this.props.options.interval);
 
 		this.props.options.interval
 			&& !this.paused
@@ -100,7 +104,7 @@ export default class Carousel extends React.Component {
 		if (1 == this.state.children.length) return;
 		e || (this.paused = true);
 		this.interval = clearInterval(this.interval);
-		console.log('Pause cycle');
+		// console.log('Pause cycle');
 	}
 
 	mouseEnterHandler = () => {
@@ -153,18 +157,18 @@ export default class Carousel extends React.Component {
 		const $active = this.active;
 		const $next = next || this.getItemForDirection(type, $active);
 		const isCycling = this.interval;
-		const direction = type == 'next' ? ' left' : ' right';
+		const direction = type == 'next' ? 'left' : 'right';
 
 		this.$next = $next;
 		this.sliding = true;
 		isCycling && this.pause();
 		$next.active = false;
-		$active.className = direction;
-		$next.className = ' ' + type;
+		$active.className = style[direction];
+		$next.className = style[type];
 		this.forceUpdate();
 
 		setTimeout(() => {
-			$next.className += direction;
+			$next.className += ' ' + style[direction];
 			this.forceUpdate();
 		}, 5);
 
@@ -186,42 +190,52 @@ export default class Carousel extends React.Component {
 	render() {
 		const { children } = this.state;
 
-		return <div className="widget widget--office widget--office-one"
+		return <div
+			className={cx('widget', 'widget--office', 'widget--office-one')}
 			onMouseEnter={this.mouseEnterHandler}
-			onMouseLeave={this.mouseLeaveHandler}>
+			onMouseLeave={this.mouseLeaveHandler}
+		>
 			{1 == children.length
 				? ''
-				: <div className="carousel slide">
-					<ol className="carousel-indicators" onClick={this.to}>
+				: <div className={cx('carousel', 'slide')}>
+					<ol className={style['carousel-indicators']} onClick={this.to}>
 						{children.map(el =>
-							<li className={el.active ? 'active' : ''} data-to={el.index} key={el.index}/>
+							<li className={cx({ active: el.active })} data-to={el.index} key={el.index}/>
 						)}
 					</ol>
-					<div role="listbox" className="carousel-inner">
+					<div role="listbox" className={style['carousel-inner']}>
 						{children.map(el =>
-							<div key={el.index} ref={'item' + el.index}
-								className={'item' + el.className + (el.active ? ' active' : '')}>
-								<img className="img-responsive" src={el.src} alt="office" />
+							<div
+								key={el.index} ref={'item' + el.index}
+								className={cx('item', el.className, { active: el.active })}
+							>
+								<img className={style['img-responsive']} src={el.src} alt="office" />
 							</div>
 						)}
 					</div>
-					<a href="http://icanchoose.ru/company/jll/#carousel-company-main" className="left carousel-control"
-						onClick={this.prev}>
-						<span aria-hidden="true" className="glyphicon glyphicon-chevron-left"/>
-						<span className="sr-only">Previous</span>
+					<a
+						href="http://icanchoose.ru/company/jll/#carousel-company-main"
+						className={cx('left', 'carousel-control')}
+						onClick={this.prev}
+					>
+						<span aria-hidden="true" className="fa fa-chevron-left" />
+						<span className={style['sr-only']}>Previous</span>
 					</a>
-					<a href="http://icanchoose.ru/company/jll/#carousel-company-main" className="right carousel-control"
-						onClick={this.next}>
-						<span aria-hidden="true" className="glyphicon glyphicon-chevron-right"/>
-						<span className="sr-only">Next</span>
+					<a
+						href="http://icanchoose.ru/company/jll/#carousel-company-main"
+						className={cx('right', 'carousel-control')}
+						onClick={this.next}
+					>
+						<span aria-hidden="true" className="fa fa-chevron-right" />
+						<span className={style['sr-only']}>Next</span>
 					</a>
 				</div>
 			}
 			{1 == children.length
-				? <img src={children[0].src} className="img-responsive" alt="office"/>
+				? <img src={children[0].src} className={style['img-responsive']} alt="office"/>
 				: ''
 			}
-			<div className="text-lower-right">Наш офис</div>
+			<div className={style['text-lower-right']}>Наш офис</div>
 		</div>;
 	};
 

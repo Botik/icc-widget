@@ -1,3 +1,7 @@
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(style);
+
 export default class VideoWg extends React.Component {
 
 	static propTypes = {
@@ -15,11 +19,11 @@ export default class VideoWg extends React.Component {
 	render() {
 		const { data: { url, image: { path }, text }, host } = this.props;
 
-		return <div className="widget widget--video">
-			<a data-widget-change="url" href={url}>
-				<img data-widget-change="image" className="img-responsive" src={host + path} />
+		return <div className={cx('widget', 'widget--video')}>
+			<a href={url}>
+				<img className={style['img-responsive']} src={host + path} />
 			</a>
-			<div data-widget-change="text" className="text-bottom">{text}</div>
+			<div className={style['text-bottom']}>{text}</div>
 		</div>;
 	}
 

@@ -20,9 +20,9 @@ export default class FigureWg extends React.Component {
 	render() {
 		const { data: { image: { path }, text }, host } = this.props;
 
-		return <div className="widget" onClick={this.clickHandler}>
-			<img src={ host + path } className="img-responsive" data-widget-change="image" />
-			<div className="text-bottom" data-widget-change="text">{ text }</div>
+		return <div className={style['widget']} onClick={this.clickHandler}>
+			<img src={ host + path } className={style['img-responsive']} />
+			<div className={style['text-bottom']}>{ text }</div>
 		</div>;
 	}
 

@@ -1,3 +1,7 @@
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(style);
+
 export default class SocialWg extends React.Component {
 
 	static propTypes = {
@@ -16,13 +20,17 @@ export default class SocialWg extends React.Component {
 	render() {
 		const { data: { message, url, title, account }, type, host, slug } = this.props;
 
-		return <div className="widget">
-			<a data-widget-change="url" target="_blank" href={`${host}/company/${slug}/`} className={`widget--social widget--${type}`}>
+		return <div className={style['widget']}>
+			<a
+				target="_blank"
+				href={`${host}/company/${slug}/`}
+				className={cx('widget--social', `widget--${type}`)}
+			>
 				{'twitter' == type
-					? <h2>@<span data-widget-change="account">{ account }</span></h2>
-					: <h2 data-widget-change="title">{ title }</h2>
+					? <div className="h2">@<span>{ account }</span></div>
+					: <div className="h2">{ title }</div>
 				}
-				<p data-widget-change="message">{ message }</p>
+				<p>{ message }</p>
 			</a>
 		</div>;
 	}

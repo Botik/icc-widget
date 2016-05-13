@@ -14,10 +14,16 @@ export default class InstagramWg extends React.Component {
 	render() {
 		const { code, url } = this.props.data;
 
-		return <div className="widget">
-			<div class="widget--instagram">
-				<div data-widget-change="code" dangerouslySetInnerHTML={{__html: code}} />
-				<a class="widget--instagram--icon" href={url} target="_blank" data-widget-change="url"><i class="fa fa-instagram"></i></a>
+		return <div className={style['widget']}>
+			<div className={style['widget--instagram']}>
+				<div dangerouslySetInnerHTML={{__html: code}} />
+				<a
+					className={style['widget--instagram--icon']}
+					href={url}
+					target="_blank"
+				>
+					<i className="fa fa-instagram"></i>
+				</a>
 			</div>
 		</div>;
 	}

@@ -2,15 +2,18 @@
 @use postcss-clearfix;
 @use postcss-mixins;
 
+@import './type.css';
+@import './media.css';
+@import './grid.css';
+@import './carousel.css';
+
 .content {
 	font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
 	color: #626262;
 	font-size: 15px;
-
 	clear: fix;
-	width: 100%;
-	padding-right: 15px;
-  padding-left: 15px;
+	padding-right: 1.5%;
+  padding-left: 1.5%;
 	margin-left: auto;
 	margin-right: auto;
 	height: auto;
@@ -88,7 +91,7 @@
 			}
 
 			float: right;
-			margin: 10px 0 25px;
+			margin: 10px 0 2.4%;
 		}
 
 		&-share {
@@ -197,14 +200,18 @@
 		width: 100%;
 		color: #fff;
 		font-size: 18px;
-		padding: 16px 0;
+		padding: 5.4% 0;
 	}
 
 	&--office {
+		&-one {
+			margin-bottom: 3.5%;
+		}
+
 		&-two, &-three {
 			.text-lower-right {
-				bottom: 30px;
-				right: 20px;
+				bottom: 15%;
+				right: 6.6%;
 				font-size: 24px;
 			}
 		}
@@ -213,7 +220,7 @@
 			.text-bottom {
 				text-align: left;
 				font-size: 14px;
-				padding: 16px;
+				padding: 5.4%;
 			}
 
 			iframe {
@@ -253,7 +260,7 @@
 		.carousel-control {
 			& .icon-next,
 			& .glyphicon-chevron-right {
-				right: 6px;
+				right: 20px;
 			}
 			& .icon-prev,
 			& .glyphicon-chevron-left {
@@ -385,7 +392,7 @@
 
 		.text-bottom {
 			text-align: left;
-			padding: 16px;
+			padding: 5.4%;
 		}
 	}
 
@@ -402,7 +409,7 @@
 				border-bottom-color: #fff;
 			}
 
-			padding: 23px;
+	    padding: 7.65%;
 			position: relative;
 		}
 
@@ -463,9 +470,9 @@
 		}
 
 		background-color: #ccc;
-		padding: 25px 20px;
+		padding: 8.4% 6.8%;
 		min-height: 220px;
-		margin-bottom: 40px;
+		margin-bottom: 16%;
 		position: relative;
 	}
 
@@ -566,17 +573,17 @@
 			}
 
 			background-color: #fff;
-			width: 100%;
+			/*width: 100%;*/
 			min-height: 160px;
 			position: relative;
-			padding: 45px 25px 65px 25px;
+	    padding: 15% 8.4% 20%;
 			font-size: 18px;
 		}
 
 		.quote-author {
 			position: absolute;
-			bottom: 25px;
-			right: 20px;
+			bottom: 8.4%;
+			right: 6.8%;
 			text-align: right;
 			font-size: 14px;
 		}
@@ -660,14 +667,13 @@
 		.text-bottom {
 			font-size: 14px;
 			text-align: left;
-			padding: 16px;
+			padding: 5.4%;
 		}
 	}
 
 	display: block;
 	position: relative;
-	margin-bottom: 20px;
-	font-family: 'Open Sans', sans-serif;
+  margin-bottom: 7%;
 }
 
 .company-xxs,
@@ -696,6 +702,7 @@
 
 	.widget .h2, .widget h2 {
 		font-size: calc(24px * 0.8);
+		margin-top: 6.4%;
 	}
 
 	.widget .h3, .widget h3 {
@@ -717,9 +724,11 @@
 
 	.widget--quote-content {
 		font-size: calc(14px * 0.8);
+		padding-bottom: 30px;
 	}
 
 	.widget--quote .quote-author {
 		font-size: calc(14px * 0.8);
+		bottom: 4px;
 	}
 }

@@ -1,3 +1,7 @@
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(style);
+
 export default class OfficeWg extends React.Component {
 
 	static propTypes = {
@@ -20,9 +24,12 @@ export default class OfficeWg extends React.Component {
 	render() {
 		const { data: { image: { path }, text }, host } = this.props;
 
-		return <div className="widget widget--office widget--office-two" onClick={this.clickHandler}>
-			<img data-widget-change="image" className="img-responsive" src={ host + path } />
-			<div data-widget-change="text" className="text-lower-right">{ text }</div>
+		return <div
+			className={cx('widget', 'widget--office', 'widget--office-two')}
+			onClick={this.clickHandler}
+		>
+			<img className={style['img-responsive']} src={ host + path } />
+			<div className={style['text-lower-right']}>{ text }</div>
 		</div>;
 	}
 
