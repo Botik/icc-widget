@@ -1,5 +1,3 @@
-import style from './style/style.css';
-
 function addScript(src, cb) {
 	const script = document.createElement('script');
 	script.src = src;

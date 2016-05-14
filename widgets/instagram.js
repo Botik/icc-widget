@@ -1,3 +1,5 @@
+import style from '../style/style.css';
+
 export default class InstagramWg extends React.Component {
 
 	static propTypes = {

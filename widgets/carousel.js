@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+import style from '../style/style.css';
 
 const cx = classNames.bind(style);
 
