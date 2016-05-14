@@ -28,8 +28,8 @@ export default class SocialWg extends React.Component {
 				className={cx('widget--social', `widget--${type}`)}
 			>
 				{'twitter' == type
-					? <div className="h2">@<span>{ account }</span></div>
-					: <div className="h2">{ title }</div>
+					? <div className={style['h2']}>@<span>{ account }</span></div>
+					: <div className={style['h2']}>{ title }</div>
 				}
 				<p>{ message }</p>
 			</a>

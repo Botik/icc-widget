@@ -679,7 +679,7 @@
 .company-xxs,
 .company-xs {
 	.widget .text-lower-right {
-		font-size: calc(48px * 0.5);
+		font-size: calc(48px * 0.4);
 	}
 }
 
@@ -697,16 +697,16 @@
 
 .company-xs {
 	.widget {
-		font-size: calc(15px * 0.8);
+		font-size: 10px;
 	}
 
 	.widget .h2, .widget h2 {
-		font-size: calc(24px * 0.8);
+		font-size: calc(24px * 0.7);
 		margin-top: 6.4%;
 	}
 
 	.widget .h3, .widget h3 {
-		font-size: calc(24px * 0.8);
+		font-size: calc(24px * 0.7);
 	}
 
 	.widget--office-three .text-lower-right,
@@ -715,20 +715,20 @@
 	}
 
 	.widget .text-bottom {
-		font-size: calc(18px * 0.8);
+		font-size: calc(18px * 0.7);
 	}
 
 	.widget--insight .insight-title {
-		font-size: calc(24px * 0.8);
+		font-size: calc(24px * 0.7);
 	}
 
 	.widget--quote-content {
-		font-size: calc(14px * 0.8);
+		font-size: calc(14px * 0.7);
 		padding-bottom: 30px;
 	}
 
 	.widget--quote .quote-author {
-		font-size: calc(14px * 0.8);
+		font-size: calc(14px * 0.7);
 		bottom: 4px;
 	}
 }
