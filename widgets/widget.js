@@ -61,13 +61,13 @@ export default class Widget extends React.Component {
 								<img alt={title} src={host + logo} />
 							</a>
 						</div>
-						<div className={style['company-heading-title']}>
+						{xxs ? '' : <div className={style['company-heading-title']}>
 							<div className={style['h1']}>
 								<span className={style['small']}>Наша компания</span>
 								<br />
 								{title}
 							</div>
-						</div>
+						</div>}
 						<div className={style['company-heading-metadata']}>
 							<span>
 								<i className={cx('sprite', 'sprite-filter-world')} /> { activity }
@@ -115,25 +115,6 @@ export default class Widget extends React.Component {
 							</div>
 						</div>
 					</div>
-					{jobs
-						? <div className={style['row']}>
-								<div className={style['col-12']}>
-									<a
-										className={cx('widget', 'widget--help-job')}
-										target="_blank"
-										href={`http://icanchoose.ru/company/${slug}/job/`}
-									>
-										<div className={style['media']}>
-											<img height={70} width={70} className={style['pull-left']} alt="Помогите найти!" src="http://icanchoose.ru/public/frontend/img/user_what.png" />
-											<div className={style['media-body']}>
-												<div className={cx('h3', 'media-heading')}>Помогите найти!</div>
-												Разыскиваем специалиста в нашу компанию!<br />Узнайте кто нам нужен!
-											</div>
-										</div>
-									</a>
-								</div>
-							</div>
-						: ''}
 				</div>
 			</div>
 		);

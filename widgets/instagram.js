@@ -1,5 +1,3 @@
-import style from '../style/style.css';
-
 export default class InstagramWg extends React.Component {
 
 	static propTypes = {
@@ -9,25 +7,11 @@ export default class InstagramWg extends React.Component {
 	};
 
 	shouldComponentUpdate(nextProps, nextState) {
-		return nextProps.data.code != nextState.data.code
-			|| nextProps.data.url != nextState.data.url
+		return false;
 	}
 
 	render() {
-		const { code, url } = this.props.data;
-
-		return <div className={style['widget']}>
-			<div className={style['widget--instagram']}>
-				<div dangerouslySetInnerHTML={{__html: code}} />
-				<a
-					className={style['widget--instagram--icon']}
-					href={url}
-					target="_blank"
-				>
-					<i className="fa fa-instagram"></i>
-				</a>
-			</div>
-		</div>;
+		return null;
 	}
 
 };

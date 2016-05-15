@@ -5,17 +5,22 @@
 		<title>Test</title>
 	</head>
 	<body>
-		<div id="wdg" style="width: 1000px; margin: 0 auto;"></div>
+		<div id="wdg2" style="width: 660px; float: right;"></div>
+		<div id="wdg" style="width: 460px;"></div>
 		<script type="text/javascript">
 			(function(d, w) {
 				var script = d.createElement('script');
-				script.src = 'http://icanchoose.ru/widgets/project4/app.js';
+				script.src = 'build/app.js';
+//				script.src = 'http://icanchoose.ru/widgets/project4/app.js';
 				script.type = 'text/javascript';
 				script.async = true;
 				d.head.appendChild(script);
 
 				w.icc = [{
 					id: 'wdg',
+					companyId: 42
+				}, {
+					id: 'wdg2',
 					companyId: 42
 				}];
 			})(document, window);
