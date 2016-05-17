@@ -25,7 +25,6 @@ function addStyle(src, cb) {
 let h = 'http://icanchoose.ru/widgets/project4/';
 addStyle('//fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,cyrillic');
 addStyle('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
-addStyle(`${h}bootstrap.min.css`);
 addStyle(`${h}app.css`);
 
 if ('undefined' == typeof fetch) {
