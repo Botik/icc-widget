@@ -576,14 +576,11 @@
 			/*width: 100%;*/
 			min-height: 160px;
 			position: relative;
-	    padding: 15% 8.4% 20%;
+	    padding: 15% 8.4% 10%;
 			font-size: 18px;
 		}
 
 		.quote-author {
-			position: absolute;
-			bottom: 8.4%;
-			right: 6.8%;
 			text-align: right;
 			font-size: 14px;
 		}
@@ -724,11 +721,9 @@
 
 	.widget--quote-content {
 		font-size: calc(14px * 0.7);
-		padding-bottom: 30px;
 	}
 
 	.widget--quote .quote-author {
 		font-size: calc(14px * 0.7);
-		bottom: 4px;
 	}
 }
