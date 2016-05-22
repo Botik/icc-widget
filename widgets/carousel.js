@@ -73,8 +73,7 @@ export default class Carousel extends React.Component {
 	}
 
 	transitionEndEventName = () => {
-		const el = document.createElement('div'),
-			transitions = {
+		const transitions = {
 				'transition': 'transitionend',
 				'OTransition': 'otransitionend',  // oTransitionEnd in very old Opera
 				'MozTransition': 'transitionend',

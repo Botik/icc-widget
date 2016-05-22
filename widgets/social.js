@@ -19,7 +19,7 @@ export default class SocialWg extends React.Component {
 	}
 
 	render() {
-		const { data: { message, url, title, account }, type, host, slug } = this.props;
+		const { data: { message, title, account }, type, host, slug } = this.props;
 
 		return <div className={style['widget']}>
 			<a

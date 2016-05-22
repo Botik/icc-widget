@@ -22,10 +22,9 @@ function addStyle(src, cb) {
 	}
 }
 
-let h = 'http://icanchoose.ru/widgets/project4/';
 addStyle('//fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,cyrillic');
 addStyle('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
-addStyle(`build/app.css`);
+addStyle(`http://icanchoose.ru/widgets/project4/app.css`);
 
 if ('undefined' == typeof fetch) {
 	addScript('https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch');
@@ -34,9 +33,9 @@ if ('undefined' == typeof fetch) {
 if ('undefined' == typeof React) {
 	const h = 'https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react';
 
-	addScript(`${h}.js`, () => {
+	addScript(`${h}.min.js`, () => {
 		if ('undefined' == typeof ReactDOM) {
-			addScript(`${h}-dom.js`, init);
+			addScript(`${h}-dom.min.js`, init);
 		}
 	});
 }

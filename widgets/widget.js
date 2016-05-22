@@ -19,7 +19,6 @@ export default class Widget extends React.Component {
 			site,
 			slug,
 			logo,
-			jobs,
 			activity,
 			location,
 			resources: {
