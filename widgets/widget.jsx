@@ -4,28 +4,27 @@ import style from '../style/style.css';
 const cx = classNames.bind(style);
 
 export default class Widget extends React.Component {
-
 	static propTypes = {
 		company: React.PropTypes.object.isRequired
 	};
 
 	static defaultProps = {
-		host: 'http://icanchoose.ru'
+		host: 'https://icanchoose.ru'
 	};
 
 	render() {
-		const { company: {
-			title,
-			site,
-			slug,
-			logo,
-			activity,
-			location,
-			resources: {
-				fixed,
-				other
-			}
-		}, host } = this.props,
+		const {
+				company: {
+					title,
+					site,
+					slug,
+					logo,
+					activity,
+					location,
+					resources: { fixed, other }
+				},
+				host
+			} = this.props,
 			Carousel = require('./carousel').default,
 			social = require('./social').default,
 			quote = require('./quote').default,
@@ -46,10 +45,10 @@ export default class Widget extends React.Component {
 			xxs = 479 >= this.props.width;
 
 		const companyClasses = {
-			'company': true,
+			company: true,
 			'company-xxs': xxs,
-			'company-xs': (xs && !xxs)
-		}
+			'company-xs': xs && !xxs
+		};
 
 		return (
 			<div className={cx(companyClasses)}>
@@ -60,22 +59,26 @@ export default class Widget extends React.Component {
 								<img alt={title} src={host + logo} />
 							</a>
 						</div>
-						{xxs ? '' : <div className={style['company-heading-title']}>
-							<div className={style['h1']}>
-								<span className={style['small']}>Наша компания</span>
-								<br />
-								{title}
+						{xxs ? (
+							''
+						) : (
+							<div className={style['company-heading-title']}>
+								<div className={style['h1']}>
+									<span className={style['small']}>Наша компания</span>
+									<br />
+									{title}
+								</div>
 							</div>
-						</div>}
+						)}
 						<div className={style['company-heading-metadata']}>
 							<span>
-								<i className={cx('sprite', 'sprite-filter-world')} /> { activity }
+								<i className={cx('sprite', 'sprite-filter-world')} /> {activity}
 							</span>
 							<span>
 								<i className={cx('sprite', 'sprite-filter-users')} /> 50 – 300 человек
 							</span>
 							<span>
-								<i className={cx('sprite', 'sprite-filter-marker')} /> { location }
+								<i className={cx('sprite', 'sprite-filter-marker')} /> {location}
 							</span>
 						</div>
 					</div>
@@ -83,9 +86,9 @@ export default class Widget extends React.Component {
 						<div className={style['row']}>
 							<div className={style[`col-${xxs ? 12 : 8}`]}>
 								<Carousel>
-									{fixed[0].data.slider.map((el, index) =>
+									{fixed[0].data.slider.map((el, index) => (
 										<img src={host + el.path} key={index} />
-									)}
+									))}
 								</Carousel>
 							</div>
 							<div className={style[`col-${xxs ? 12 : 4}`]}>
@@ -95,22 +98,28 @@ export default class Widget extends React.Component {
 						</div>
 						<div className={style['row']}>
 							<div className={style[`col-${xxs ? 12 : 4}`]}>
-								{Object.keys(other).filter(el => 0 == el % 3).map(el => {
-									const Widget = widgets[other[el].type];
-									return <Widget host={host} slug={slug} { ...other[el]} key={el} />;
-								})}
+								{Object.keys(other)
+									.filter(el => 0 == el % 3)
+									.map(el => {
+										const Widget = widgets[other[el].type];
+										return <Widget host={host} slug={slug} {...other[el]} key={el} />;
+									})}
 							</div>
 							<div className={style[`col-${xxs ? 12 : 4}`]}>
-								{Object.keys(other).filter(el => 1 == el % 3).map(el => {
-									const Widget = widgets[other[el].type];
-									return <Widget host={host} slug={slug} { ...other[el]} key={el} />;
-								})}
+								{Object.keys(other)
+									.filter(el => 1 == el % 3)
+									.map(el => {
+										const Widget = widgets[other[el].type];
+										return <Widget host={host} slug={slug} {...other[el]} key={el} />;
+									})}
 							</div>
 							<div className={style[`col-${xxs ? 12 : 4}`]}>
-								{Object.keys(other).filter(el => 2 == el % 3).map(el => {
-									const Widget = widgets[other[el].type];
-									return <Widget host={host} slug={slug} { ...other[el]} key={el} />;
-								})}
+								{Object.keys(other)
+									.filter(el => 2 == el % 3)
+									.map(el => {
+										const Widget = widgets[other[el].type];
+										return <Widget host={host} slug={slug} {...other[el]} key={el} />;
+									})}
 							</div>
 						</div>
 					</div>
@@ -118,5 +127,4 @@ export default class Widget extends React.Component {
 			</div>
 		);
 	}
-
-};
+}

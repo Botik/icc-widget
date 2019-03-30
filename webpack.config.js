@@ -1,13 +1,35 @@
-"use strict";
+'use strict';
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
-const cssnext = require('postcss-cssnext');
-const use = require('postcss-use');
-const postcssImport = require('postcss-import');
-const NODE_ENV = process.env.NODE_ENV || 'development';
-const prod = 'development' != NODE_ENV;
-// ?modules&importLoaders=2&localIdentName=[local]--[hash:base64:5]
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const mode = process.env.NODE_ENV || 'development';
+const plugins = [
+	new MiniCssExtractPlugin({
+		filename: '[name].css'
+	}),
+	new CleanWebpackPlugin(),
+	new webpack.optimize.LimitChunkCountPlugin({
+		maxChunks: 1
+	})
+];
+const postcssPlugins = loader => [
+	require('postcss-import')({ root: loader.resourcePath }),
+	require('postcss-preset-env')({
+		browsers: '> 15%',
+		features: {
+			'nesting-rules': true
+		}
+	}),
+	require('postcss-mixins'),
+	require('postcss-utilities')
+	// require('cssnano')
+];
+const babelPlugins = [
+	// plugin-proposal-decorators is only needed if you're using experimental decorators in TypeScript
+	['@babel/plugin-proposal-decorators', { legacy: true }],
+	['@babel/plugin-proposal-class-properties', { loose: true }, '']
+];
 
 module.exports = {
 	entry: './index',
@@ -16,63 +38,53 @@ module.exports = {
 		publicPath: '/',
 		filename: 'app.js'
 	},
+	devtool: 'development' === mode ? 'source-map' : false,
+	mode,
+	target: 'web',
+	resolve: {
+		extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
+	},
+	performance: {
+		hints: false
+	},
 	module: {
-		loaders: [
+		rules: [
 			{
-				test: /\.js?$/,
+				test: /\.jsx?$/,
 				exclude: /(node_modules|bower_components)/,
-				loader: 'babel'
+				use: {
+					loader: 'babel-loader',
+					options: {
+						cacheDirectory: true,
+						babelrc: false,
+						presets: [['@babel/preset-env', { targets: '> 15%, not dead' }], '@babel/preset-react'],
+						plugins: babelPlugins
+					}
+				}
 			},
+			{ enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
 			{
-				test: /\.css$/,
-				loader: ExtractTextPlugin.extract(
-					'style-loader',
-					'css-loader?modules&importLoaders=1!postcss-loader'
-				)
+				test: /\.css/,
+				use: [
+					MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader',
+						options: {
+							importLoaders: 1,
+							modules: true,
+							localIdentName: '_[name]_[local]_[hash:base64:5]'
+						}
+					},
+					{
+						loader: 'postcss-loader',
+						options: {
+							ident: 'postcss',
+							plugins: postcssPlugins
+						}
+					}
+				]
 			}
 		]
 	},
-	plugins: [
-		new ExtractTextPlugin('app.css', {
-			allChunks: true
-		})
-	],
-	postcss: function(webpack) {
-		return [
-			use({
-				modules: [
-					'postcss-nested',
-					'postcss-clearfix',
-					'postcss-focus',
-					'postcss-inline-svg',
-					'postcss-svgo',
-					'postcss-mixins'
-				]
-			}),
-			cssnext({
-				browsers: '> 1%, last 2 versions',
-				features: {
-					nesting: false,
-					rem: {
-						rootValue: 10
-					}
-				}
-			}),
-			postcssImport({
-				addDependencyTo: webpack
-			})
-		];
-	}
+	plugins
 };
-
-if (prod) {
-	module.exports.plugins.push(
-		new webpack.optimize.UglifyJsPlugin({
-			compress: {
-				warnings: false,
-				drop_console: true,
-				unsafe: true
-			}
-		})
-	);
-}

@@ -4,13 +4,9 @@ import style from '../style/style.css';
 const cx = classNames.bind(style);
 
 export default class Carousel extends React.Component {
-
 	static propTypes = {
 		options: React.PropTypes.object,
-		children: React.PropTypes.oneOfType([
-			React.PropTypes.element,
-			React.PropTypes.array
-		]).isRequired
+		children: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.array]).isRequired
 	};
 
 	static defaultProps = {
@@ -74,11 +70,11 @@ export default class Carousel extends React.Component {
 
 	transitionEndEventName = () => {
 		const transitions = {
-				'transition': 'transitionend',
-				'OTransition': 'otransitionend',  // oTransitionEnd in very old Opera
-				'MozTransition': 'transitionend',
-				'WebkitTransition': 'webkitTransitionEnd'
-			};
+			transition: 'transitionend',
+			OTransition: 'otransitionend', // oTransitionEnd in very old Opera
+			MozTransition: 'transitionend',
+			WebkitTransition: 'webkitTransitionEnd'
+		};
 
 		for (let i in transitions) {
 			if (transitions.hasOwnProperty(i)) {
@@ -87,7 +83,7 @@ export default class Carousel extends React.Component {
 		}
 
 		//TODO: throw 'TransitionEnd event is not supported in this browser';
-	}
+	};
 
 	cycle = e => {
 		if (1 == this.state.children.length) return;
@@ -95,39 +91,39 @@ export default class Carousel extends React.Component {
 		this.interval && clearInterval(this.interval);
 		// console.log('Set cycle ' + this.props.options.interval);
 
-		this.props.options.interval
-			&& !this.paused
-			&& (this.interval = setInterval(this.next, this.props.options.interval))
-	}
+		this.props.options.interval &&
+			!this.paused &&
+			(this.interval = setInterval(this.next, this.props.options.interval));
+	};
 
 	pause = e => {
 		if (1 == this.state.children.length) return;
 		e || (this.paused = true);
 		this.interval = clearInterval(this.interval);
 		// console.log('Pause cycle');
-	}
+	};
 
 	mouseEnterHandler = () => {
 		this.pause();
-	}
+	};
 
 	mouseLeaveHandler = () => {
 		this.cycle();
-	}
+	};
 
 	next = e => {
 		e && e.preventDefault();
 		if (this.sliding) return;
 
 		return this.slide('next');
-	}
+	};
 
 	prev = e => {
 		e && e.preventDefault();
 		if (this.sliding) return;
 
 		return this.slide('prev');
-	}
+	};
 
 	to = e => {
 		e.preventDefault();
@@ -137,9 +133,9 @@ export default class Carousel extends React.Component {
 		if (oi == next.index) return;
 
 		this.slide(oi < next.index ? 'next' : 'prev', next);
-	}
+	};
 
-	getItemForDirection = (type, active) => 'next' == type ? active.next : active.prev;
+	getItemForDirection = (type, active) => ('next' == type ? active.next : active.prev);
 
 	trEndHandler = e => {
 		if (!this.sliding) return;
@@ -151,7 +147,7 @@ export default class Carousel extends React.Component {
 		e && e.target.removeEventListener(this.trEnd, this.trEndHandler);
 		this.sliding = false;
 		this.active = this.$next;
-	}
+	};
 
 	slide = (type, next) => {
 		const $active = this.active;
@@ -177,66 +173,59 @@ export default class Carousel extends React.Component {
 			div.addEventListener(this.trEnd, this.trEndHandler, false);
 		}
 
-		setTimeout(
-			this.trEndHandler,
-			this.props.options.interval
-		);
+		setTimeout(this.trEndHandler, this.props.options.interval);
 
 		isCycling && this.cycle();
 
 		return this;
-	}
+	};
 
 	render() {
 		const { children } = this.state;
 
-		return <div
-			className={cx('widget', 'widget--office', 'widget--office-one')}
-			onMouseEnter={this.mouseEnterHandler}
-			onMouseLeave={this.mouseLeaveHandler}
-		>
-			{1 == children.length
-				? ''
-				: <div className={cx('carousel', 'slide')}>
-					<ol className={style['carousel-indicators']} onClick={this.to}>
-						{children.map(el =>
-							<li className={cx({ active: el.active })} data-to={el.index} key={el.index}/>
-						)}
-					</ol>
-					<div role="listbox" className={style['carousel-inner']}>
-						{children.map(el =>
-							<div
-								key={el.index} ref={'item' + el.index}
-								className={cx('item', el.className, { active: el.active })}
-							>
-								<img className={style['img-responsive']} src={el.src} alt="office" />
-							</div>
-						)}
+		return (
+			<div
+				className={cx('widget', 'widget--office', 'widget--office-one')}
+				onMouseEnter={this.mouseEnterHandler}
+				onMouseLeave={this.mouseLeaveHandler}
+			>
+				{1 == children.length ? (
+					''
+				) : (
+					<div className={cx('carousel', 'slide')}>
+						<ol className={style['carousel-indicators']} onClick={this.to}>
+							{children.map(el => (
+								<li className={cx({ active: el.active })} data-to={el.index} key={el.index} />
+							))}
+						</ol>
+						<div role="listbox" className={style['carousel-inner']}>
+							{children.map(el => (
+								<div key={el.index} ref={'item' + el.index} className={cx('item', el.className, { active: el.active })}>
+									<img className={style['img-responsive']} src={el.src} alt="office" />
+								</div>
+							))}
+						</div>
+						<a
+							href="http://icanchoose.ru/company/jll/#carousel-company-main"
+							className={cx('left', 'carousel-control')}
+							onClick={this.prev}
+						>
+							<span aria-hidden="true" className="fa fa-chevron-left" />
+							<span className={style['sr-only']}>Previous</span>
+						</a>
+						<a
+							href="http://icanchoose.ru/company/jll/#carousel-company-main"
+							className={cx('right', 'carousel-control')}
+							onClick={this.next}
+						>
+							<span aria-hidden="true" className="fa fa-chevron-right" />
+							<span className={style['sr-only']}>Next</span>
+						</a>
 					</div>
-					<a
-						href="http://icanchoose.ru/company/jll/#carousel-company-main"
-						className={cx('left', 'carousel-control')}
-						onClick={this.prev}
-					>
-						<span aria-hidden="true" className="fa fa-chevron-left" />
-						<span className={style['sr-only']}>Previous</span>
-					</a>
-					<a
-						href="http://icanchoose.ru/company/jll/#carousel-company-main"
-						className={cx('right', 'carousel-control')}
-						onClick={this.next}
-					>
-						<span aria-hidden="true" className="fa fa-chevron-right" />
-						<span className={style['sr-only']}>Next</span>
-					</a>
-				</div>
-			}
-			{1 == children.length
-				? <img src={children[0].src} className={style['img-responsive']} alt="office"/>
-				: ''
-			}
-			<div className={style['text-lower-right']}>Наш офис</div>
-		</div>;
-	};
-
-};
+				)}
+				{1 == children.length ? <img src={children[0].src} className={style['img-responsive']} alt="office" /> : ''}
+				<div className={style['text-lower-right']}>Наш офис</div>
+			</div>
+		);
+	}
+}

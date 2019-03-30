@@ -1,5 +1,4 @@
 export default class InstagramWg extends React.Component {
-
 	static propTypes = {
 		data: React.PropTypes.object.isRequired,
 		type: React.PropTypes.string.isRequired,
@@ -13,5 +12,4 @@ export default class InstagramWg extends React.Component {
 	render() {
 		return null;
 	}
-
-};
+}

@@ -3,6 +3,7 @@ function addScript(src, cb) {
 	script.src = src;
 	script.type = 'text/javascript';
 	script.async = true;
+	// script.crossorigin = true;
 	document.head.appendChild(script);
 
 	if (cb) {
@@ -26,16 +27,10 @@ addStyle('//fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,cyril
 addStyle('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
 addStyle(`http://icanchoose.ru/widgets/project4/app.css`);
 
-if ('undefined' == typeof fetch) {
-	addScript('https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch');
-}
-
 if ('undefined' == typeof React) {
-	const h = 'https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react';
-
-	addScript(`${h}.min.js`, () => {
+	addScript('https://unpkg.com/react@16/umd/react.production.min.js', () => {
 		if ('undefined' == typeof ReactDOM) {
-			addScript(`${h}-dom.min.js`, init);
+			addScript('https://unpkg.com/react-dom@16/umd/react-dom.production.min.js', init);
 		}
 	});
 }
@@ -65,7 +60,7 @@ function init() {
 			return console.error('Element by iD ' + opt.id + ' not found');
 		}
 
-		fetch(`http://icanchoose.ru/api/company/${opt.companyId}/`)
+		fetch(`https://icanchoose.ru/api/company/${opt.companyId}/`)
 			.then(res => res.json())
 			.then(res => {
 				const wg = require('./widgets/widget').default;
@@ -80,4 +75,4 @@ function init() {
 			})
 			.catch(err => console.error(err));
 	});
-};
+}
